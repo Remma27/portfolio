@@ -1,41 +1,53 @@
 import React, { useState } from 'react';
-import { Menu, X, Linkedin, Mail, Phone, Github, ExternalLink, Code, Server, Database, Cloud, Monitor } from 'lucide-react';
+import { Menu, X, Linkedin, Mail, Phone, Github, ExternalLink, Download } from 'lucide-react';
+
+const TechIcon = ({ name }) => {
+    return (
+        <div className="bg-gray-700 text-green-300 rounded-full px-3 py-1 text-sm">
+            {name}
+        </div>
+    );
+};
 
 const TechCategory = ({ category, technologies }) => (
-    <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-3">{category}</h3>
-        <div className="flex flex-wrap gap-4">
+    <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-2">{category}</h3>
+        <div className="flex flex-wrap gap-2">
             {technologies.map((tech, index) => (
-                <div key={index} className="flex items-center bg-gray-800 rounded-full px-3 py-1">
-                    <tech.icon size={20} className="text-green-400 mr-2" />
-                    <span className="text-sm">{tech.name}</span>
-                </div>
+                <TechIcon key={index} name={tech} />
             ))}
         </div>
     </div>
 );
 
-const ProjectCard = ({ title, description, technologies, imageUrl, projectUrl }) => (
-    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-        <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
-        <div className="p-4">
-            <h3 className="text-xl font-semibold mb-2">{title}</h3>
-            <p className="text-green-200 mb-4">{description}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-                {technologies.map((tech, index) => (
-                    <span key={index} className="bg-green-700 text-green-100 px-2 py-1 rounded text-sm">
-                        {tech}
-                    </span>
-                ))}
-            </div>
+const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl }) => (
+    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg p-4">
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-green-200 mb-4">{description}</p>
+        <div className="flex flex-wrap gap-2 mb-4">
+            {technologies.map((tech, index) => (
+                <TechIcon key={index} name={tech} />
+            ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
             <a
                 href={projectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors"
             >
-                Ver Proyecto <ExternalLink className="ml-2 w-4 h-4" />
+                Repositorio <ExternalLink className="ml-2 w-4 h-4" />
             </a>
+            {videoUrl && (
+                <a
+                    href={videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+                >
+                    Video <ExternalLink className="ml-2 w-4 h-4" />
+                </a>
+            )}
         </div>
     </div>
 );
@@ -48,13 +60,10 @@ const EducationCard = ({ title, institution, period }) => (
     </div>
 );
 
-const CertificateCard = ({ title, issuer, imageUrl }) => (
-    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-        <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
-        <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">{title}</h3>
-            <p className="text-green-200">{issuer}</p>
-        </div>
+const CertificateCard = ({ title, issuer }) => (
+    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-green-200">{issuer}</p>
     </div>
 );
 
@@ -66,50 +75,84 @@ const Portfolio = () => {
     };
 
     const technologiesByCategory = {
-        'Lenguajes de Programación': [
-            { name: 'JavaScript', icon: Code },
-            { name: 'TypeScript', icon: Code },
-            { name: 'Python', icon: Code },
-            { name: 'Java', icon: Code },
-        ],
-        'Frameworks y Librerías': [
-            { name: 'React', icon: Monitor },
-            { name: 'Angular', icon: Monitor },
-            { name: 'Express.js', icon: Server },
-        ],
-        'Bases de Datos': [
-            { name: 'MongoDB', icon: Database },
-            { name: 'MySQL', icon: Database },
-        ],
-        'Tecnologías Cloud': [
-            { name: 'AWS', icon: Cloud },
-        ],
-        'Otros': [
-            { name: 'Node.js', icon: Server },
-        ],
+        'Lenguajes de Programación': ['JavaScript', 'TypeScript', 'Python', 'Java'],
+        'Frameworks y Librerías': ['React', 'Angular', 'Express.js'],
+        'Desarrollo Móvil': ['Android Studio', 'React Native'],
+        'Bases de Datos': ['MongoDB', 'MySQL', 'SQL', 'Oracle'],
+        'Tecnologías Cloud': ['AWS'],
+        'Control de Versiones': ['Git', 'GitHub'],
+        'Sistemas Operativos': ['Windows', 'Linux'],
+        'Otros': ['Node.js', 'Firebase', 'APIs RESTful'],
     };
+
+    const softSkills = [
+        'Comunicación efectiva',
+        'Trabajo en equipo',
+        'Resolución de problemas',
+        'Adaptabilidad',
+        'Pensamiento crítico',
+        'Gestión del tiempo',
+        'Liderazgo',
+        'Creatividad',
+    ];
 
     const projects = [
         {
-            title: "Sistema de Gestión de Inventario",
-            description: "Una aplicación web full-stack para gestionar inventarios de pequeñas empresas.",
-            technologies: ['React', 'Node.js', 'MongoDB'],
-            imageUrl: "/api/placeholder/400/300",
-            projectUrl: "https://github.com/Remma27",
+            title: "Student Welfare App",
+            description: "Aplicación web para gestionar registros de apoyo al bienestar estudiantil.",
+            technologies: ['Angular', 'Node.js', 'MySQL', 'Express.js'],
+            projectUrl: "https://github.com/Remma27/StudentWelfareApp",
+            videoUrl: "https://example.com/student-welfare-app-video",
         },
         {
-            title: "App de Seguimiento Fitness",
-            description: "Aplicación móvil para seguimiento de rutinas de ejercicio y dieta.",
-            technologies: ['React Native', 'Firebase'],
-            imageUrl: "/api/placeholder/400/300",
-            projectUrl: "https://github.com/Remma27",
+            title: "Firebase Research Portal",
+            description: "Portal web para gestionar proyectos de investigación estudiantil usando Firebase.",
+            technologies: ['Firebase', 'React', 'JavaScript'],
+            projectUrl: "https://github.com/Remma27/FirebaseResearchPortal/tree/main",
+            videoUrl: "https://example.com/firebase-research-portal-video",
         },
         {
-            title: "Dashboard de Análisis de Datos",
-            description: "Dashboard interactivo para visualización de datos de ventas y métricas de negocio.",
-            technologies: ['Angular', 'D3.js', 'Node.js'],
-            imageUrl: "/api/placeholder/400/300",
-            projectUrl: "https://github.com/Remma27",
+            title: "Student Research Android",
+            description: "Aplicación Android para gestionar proyectos de investigación estudiantil.",
+            technologies: ['Android Studio', 'Kotlin', 'Firebase'],
+            projectUrl: "https://github.com/Remma27/StudentResearchAndroid",
+            videoUrl: "https://example.com/student-research-android-video",
+        },
+        {
+            title: "Pokedex",
+            description: "Aplicación móvil que simula una Pokedex para explorar información sobre Pokémon.",
+            technologies: ['React Native', 'JavaScript', 'PokeAPI'],
+            projectUrl: "https://github.com/Remma27/Pokedex",
+        },
+        {
+            title: "Login React Native Firebase",
+            description: "Sistema de autenticación en React Native utilizando Firebase.",
+            technologies: ['React Native', 'Firebase', 'JavaScript'],
+            projectUrl: "https://github.com/Remma27/LoginReactNativeFirebase",
+        },
+        {
+            title: "GraphQL Job Listing Platform",
+            description: "Solución de base de datos para gestionar un inventario digital de profesionales en la región del Pacífico de Costa Rica.",
+            technologies: ['MongoDB', 'Apollo', 'GraphQL', 'Node.js'],
+            projectUrl: "https://github.com/Remma27/GraphQLJobListingPlatform",
+        },
+        {
+            title: "Job Search Platform",
+            description: "Aplicación web con interfaces para solicitantes de empleo y empleadores. Incluye registro, gestión de perfiles, publicación de ofertas y búsqueda de trabajos o candidatos.",
+            technologies: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+            projectUrl: "https://github.com/Remma27/job-search-platform",
+        },
+        {
+            title: "Graphic Designer Portfolio",
+            description: "Portafolio web de una sola página para un diseñador gráfico con secciones como 'Acerca de', 'Proyectos', formulario de contacto y enlaces a redes sociales.",
+            technologies: ['HTML', 'CSS', 'jQuery'],
+            projectUrl: "https://github.com/Remma27/graphic-designer-portfolio",
+        },
+        {
+            title: "Angular Rick and Morty App",
+            description: "Aplicación web que utiliza la API de Rick and Morty para mostrar información sobre personajes, episodios y ubicaciones de la serie.",
+            technologies: ['Angular', 'TypeScript', 'RxJS'],
+            projectUrl: "https://github.com/Remma27/angular-rick-and-morty",
         },
     ];
 
@@ -125,7 +168,7 @@ const Portfolio = () => {
             period: "Enero 2022 – Mayo 2024",
         },
         {
-            title: "Diploma Técnico en Contabilidad",
+            title: "Tecnico Medio en Contabilidad",
             institution: "Colegio Técnico Profesional de Puntarenas",
             period: "Enero 2019 – Diciembre 2021",
         },
@@ -135,17 +178,14 @@ const Portfolio = () => {
         {
             title: "CCNAv7 III TI 3-2023 - G",
             issuer: "Cisco",
-            imageUrl: "/api/placeholder/400/300",
         },
         {
             title: "CCNAv7 II TI 2-2023 - F",
             issuer: "Cisco",
-            imageUrl: "/api/placeholder/400/300",
         },
         {
             title: "CCNAv7 I TI 1-2023 - A",
             issuer: "Cisco",
-            imageUrl: "/api/placeholder/400/300",
         },
     ];
 
@@ -182,22 +222,42 @@ const Portfolio = () => {
             <main className="container mx-auto p-4 max-w-4xl">
                 <section id="about" className="my-8 text-center">
                     <h2 className="text-3xl font-bold mb-4">Sobre mí</h2>
-                    <p className="text-green-200">
+                    <p className="text-green-200 mb-4">
                         Soy un estudiante de Ingeniería en Tecnologías de la Información con enfoque en desarrollo web full-stack.
                         Me caracterizo por mi atención al detalle y enfoque analítico en la resolución de problemas.
                     </p>
+                    <a
+                        href="/path/to/your-cv.pdf"
+                        download
+                        className="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors"
+                    >
+                        Descargar CV <Download className="ml-2 w-4 h-4" />
+                    </a>
                 </section>
 
                 <section id="skills" className="my-12">
                     <h2 className="text-3xl font-bold mb-6 text-center">Habilidades Técnicas</h2>
-                    {Object.entries(technologiesByCategory).map(([category, technologies]) => (
-                        <TechCategory key={category} category={category} technologies={technologies} />
-                    ))}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Object.entries(technologiesByCategory).map(([category, technologies]) => (
+                            <TechCategory key={category} category={category} technologies={technologies} />
+                        ))}
+                    </div>
+                </section>
+
+                <section id="soft-skills" className="my-12">
+                    <h2 className="text-3xl font-bold mb-6 text-center">Habilidades Blandas</h2>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {softSkills.map((skill, index) => (
+                            <div key={index} className="bg-gray-800 rounded-full px-4 py-2">
+                                {skill}
+                            </div>
+                        ))}
+                    </div>
                 </section>
 
                 <section id="projects" className="my-12">
                     <h2 className="text-3xl font-bold mb-6 text-center">Proyectos Destacados</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-2 gap-6">
                         {projects.map((project, index) => (
                             <ProjectCard key={index} {...project} />
                         ))}
