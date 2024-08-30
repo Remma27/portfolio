@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Menu, X, Linkedin, Mail, Phone, Github, ExternalLink, Download } from 'lucide-react';
-import { motion } from 'framer-motion';
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Linkedin, Mail, Phone, Github, ExternalLink, Download, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const TechIcon = ({ name }) => {
     return (
@@ -81,9 +83,9 @@ const getTechColor = (tech) => {
 };
 
 const TechCategory = ({ category, technologies }) => (
-    <div className="mb-4 text-center"> {/* Centro de texto horizontalmente */}
+    <div className="mb-4 text-center">
         <h3 className="text-lg font-semibold mb-2">{category}</h3>
-        <div className="flex flex-wrap gap-2 justify-center items-center"> {/* Centrado horizontal y vertical */}
+        <div className="flex flex-wrap gap-2 justify-center items-center">
             {technologies.map((tech, index) => (
                 <TechIcon key={index} name={tech} />
             ))}
@@ -93,51 +95,36 @@ const TechCategory = ({ category, technologies }) => (
 
 
 const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, pageUrl }) => (
-    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full min-h-[400px]">
-        <div className="p-4 flex flex-col flex-grow">
-            <h3 className="text-xl font-semibold mb-2">{title}</h3>
-            <p className="text-green-200 mb-4 flex-grow">{description}</p>
+    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
+        <div className="p-4 flex flex-col h-full">
+            <h3 className="text-xl font-semibold mb-2 text-lg">{title}</h3>
+            <p className="text-green-200 mb-4 flex-grow overflow-y-auto">
+                {description}
+            </p>
             <div className="flex flex-wrap gap-2 mb-4">
                 {technologies.map((tech, index) => (
                     <TechIcon key={index} name={tech} />
                 ))}
             </div>
-            <div className="flex justify-between mt-auto">
-                <a
-                    href={projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition-colors text-sm"
-                >
-                    Repositorio <ExternalLink className="ml-1 w-4 h-4" />
-                </a>
-                {videoUrl && (
-                    <a
-                        href={videoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors text-sm"
-                    >
-                        Video <ExternalLink className="ml-1 w-4 h-4" />
-                    </a>
-                )}
-                {pageUrl && (
-                    <a
-                        href={pageUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center bg-purple-600 text-white px-3 py-2 rounded hover:bg-purple-700 transition-colors text-sm"
-                    >
-                        Página <ExternalLink className="ml-1 w-4 h-4" />
-                    </a>
-                )}
+            <div className="flex flex-wrap gap-2 mt-auto">
+                <ActionButton href={projectUrl} label="Repositorio" color="green" />
+                {videoUrl && <ActionButton href={videoUrl} label="Video" color="blue" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Página" color="purple" />}
             </div>
         </div>
     </div>
 );
 
-
-
+const ActionButton = ({ href, label, color }) => (
+    <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-700 transition-colors text-sm`}
+    >
+        {label} <ExternalLink className="ml-1 w-4 h-4" />
+    </a>
+);
 
 const EducationCard = ({ title, institution, period }) => (
     <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px]">
@@ -157,9 +144,23 @@ const CertificateCard = ({ title, issuer }) => (
 
 const Portfolio = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.pageYOffset > 300);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const technologiesByCategory = {
@@ -174,14 +175,14 @@ const Portfolio = () => {
     };
 
     const softSkills = [
-        'Comunicación efectiva',
-        'Trabajo en equipo',
+        'Análisis detallado',
+        'Enfoque en la calidad',
         'Resolución de problemas',
-        'Adaptabilidad',
         'Pensamiento crítico',
-        'Gestión del tiempo',
-        'Liderazgo',
-        'Creatividad',
+        'Orientación a resultados',
+        'Atención al detalle',
+        'Toma de decisiones basada en datos',
+        'Perseverancia',
     ];
 
     const projects = [
@@ -308,10 +309,12 @@ const Portfolio = () => {
     };
 
     return (
-        <div className="bg-gray-900 text-green-300 min-h-screen">
-            <nav className="bg-gray-800 p-4 sticky top-0 z-10 shadow-lg">
+        <div className="bg-gray-900 text-green-300 min-h-screen relative">
+            <nav className="bg-gray-800 p-4 sticky top-0 z-50 shadow-lg transition-all duration-300">
                 <div className="container mx-auto flex justify-between items-center">
                     <h1 className="text-2xl font-bold text-green-400">Emmanuel Rodríguez</h1>
+
+                    {/* Menu for larger screens */}
                     <div className="hidden md:flex space-x-4">
                         {['about', 'skills', 'projects', 'education', 'certificates', 'contact'].map((item) => (
                             <motion.a
@@ -325,6 +328,8 @@ const Portfolio = () => {
                             </motion.a>
                         ))}
                     </div>
+
+                    {/* Hamburger button for smaller screens */}
                     <motion.button
                         onClick={toggleMenu}
                         className="md:hidden text-green-400"
@@ -333,27 +338,31 @@ const Portfolio = () => {
                         {isMenuOpen ? <X /> : <Menu />}
                     </motion.button>
                 </div>
-            </nav>
 
-            {isMenuOpen && (
-                <motion.div
-                    className="md:hidden bg-gray-800 p-4"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                >
-                    {['about', 'skills', 'projects', 'education', 'certificates', 'contact'].map((item) => (
-                        <motion.a
-                            key={item}
-                            href={`#${item}`}
-                            className="block py-2 hover:text-green-500 transition-colors duration-300"
-                            whileHover={{ x: 10 }}
+                {/* Dropdown menu for smaller screens */}
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.div
+                            className="md:hidden bg-gray-800 p-4 flex flex-col space-y-2"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
                         >
-                            {item.charAt(0).toUpperCase() + item.slice(1)}
-                        </motion.a>
-                    ))}
-                </motion.div>
-            )}
+                            {['about', 'skills', 'projects', 'education', 'certificates', 'contact'].map((item) => (
+                                <motion.a
+                                    key={item}
+                                    href={`#${item}`}
+                                    className="block py-2 hover:text-green-500 transition-colors duration-300"
+                                    whileHover={{ x: 10 }}
+                                    onClick={() => setIsMenuOpen(false)} // Close the menu on link click
+                                >
+                                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                                </motion.a>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </nav>
 
             <main className="container mx-auto p-4 max-w-4xl">
                 <motion.section
@@ -511,8 +520,24 @@ const Portfolio = () => {
                 </motion.section>
             </main>
 
+            <AnimatePresence>
+                {showScrollTop && (
+                    <motion.button
+                        className="fixed bottom-6 right-6 bg-green-600 text-white p-3 rounded-full shadow-lg"
+                        onClick={scrollToTop}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                    >
+                        <ChevronUp />
+                    </motion.button>
+                )}
+            </AnimatePresence>
+
             <footer className="bg-gray-800 text-center p-4 text-green-200">
-                <p>&copy; 2024 Emmanuel Rodríguez Solano. Todos los derechos reservados.</p>
+                <p>&copy; 2024 Emmanuel Rodríguez Solano.</p>
             </footer>
         </div>
     );
