@@ -44,6 +44,7 @@ const getTechIcon = (tech) => {
         'GraphQL': '🔍',
         'Apollo': '🚀',
         'PokeAPI': '🔎',
+        'Kotlin': '🅺', // Icono para Kotlin
     };
     return icons[tech] || '🔹';
 };
@@ -78,6 +79,7 @@ const getTechColor = (tech) => {
         'GraphQL': 'bg-pink-500',
         'Apollo': 'bg-blue-900',
         'PokeAPI': 'bg-red-300',
+        'Kotlin': 'bg-purple-700', // Color para Kotlin
     };
     return colors[tech] || 'bg-gray-500';
 };
@@ -92,7 +94,6 @@ const TechCategory = ({ category, technologies }) => (
         </div>
     </div>
 );
-
 
 const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, pageUrl }) => (
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
@@ -127,29 +128,22 @@ const ActionButton = ({ href, label, color }) => (
 );
 
 const EducationCard = ({ title, institution, period }) => (
-    <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px]">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-green-200">{institution}</p>
-        <p className="text-green-400">{period}</p>
+    <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px] h-full">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-green-400">{institution}</p>
+        <p className="text-green-200">{period}</p>
     </div>
 );
 
-
-const CertificateCard = ({ title, issuer }) => (
-    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className="text-green-200">{issuer}</p>
+const CertificateCard = ({ title, issuer, description }) => (
+    <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px] h-full">
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-green-400">{issuer}</p>
+        <p className="text-green-200">{description}</p>
     </div>
 );
 
 const Portfolio = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showScrollTop, setShowScrollTop] = useState(false);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
     useEffect(() => {
         const handleScroll = () => {
             setShowScrollTop(window.pageYOffset > 300);
@@ -159,12 +153,43 @@ const Portfolio = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY > 300);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const sectionTop = section.offsetTop - navHeight - 20; // 20px extra padding
+            window.scrollTo({
+                top: sectionTop,
+                behavior: 'smooth'
+            });
+        }
+        setIsMenuOpen(false);
     };
 
     const technologiesByCategory = {
-        'Lenguajes de Programación': ['JavaScript', 'TypeScript', 'Python', 'Java'],
+        'Lenguajes de Programación': ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
         'Frameworks y Librerías': ['React', 'Angular', 'Express.js'],
         'Desarrollo Móvil': ['Android Studio', 'React Native'],
         'Bases de Datos': ['MongoDB', 'MySQL', 'SQL', 'Oracle'],
@@ -187,20 +212,20 @@ const Portfolio = () => {
 
     const projects = [
         {
-            title: "Student Welfare App",
+            title: "Aplicación de Bienestar Estudiantil",
             description: "Aplicación web diseñada para gestionar y registrar actividades de apoyo al bienestar estudiantil.",
             technologies: ["Angular", "Node.js", "MySQL", "Express.js"],
             projectUrl: "https://github.com/Remma27/StudentWelfareApp",
         },
         {
-            title: "Firebase Research Portal",
+            title: "Portal de Investigación con Firebase",
             description: "Portal web para la gestión de proyectos de investigación estudiantil, utilizando Firebase como backend.",
             technologies: ["Firebase", "React", "JavaScript"],
             projectUrl: "https://github.com/Remma27/FirebaseResearchPortal/tree/main",
             videoUrl: "https://youtu.be/w1rQoe08cd8",
         },
         {
-            title: "Student Research Android",
+            title: "Investigación Estudiantil Android",
             description: "Aplicación Android para administrar proyectos de investigación estudiantil desde dispositivos móviles.",
             technologies: ["Android Studio", "Kotlin", "Firebase"],
             projectUrl: "https://github.com/Remma27/StudentResearchAndroid",
@@ -213,45 +238,44 @@ const Portfolio = () => {
             projectUrl: "https://github.com/Remma27/Pokedex",
         },
         {
-            title: "Login React Native Firebase",
+            title: "Inicio de Sesión con React Native y Firebase",
             description: "Sistema de autenticación en aplicaciones móviles desarrollado con React Native y Firebase.",
             technologies: ["React Native", "Firebase", "JavaScript"],
             projectUrl: "https://github.com/Remma27/LoginReactNativeFirebase",
         },
         {
-            title: "GraphQL Job Listing Platform",
+            title: "Plataforma de Listado de Trabajos con GraphQL",
             description: "Plataforma de gestión de inventario digital para profesionales en la región del Pacífico de Costa Rica, utilizando GraphQL y MongoDB.",
             technologies: ["MongoDB", "Apollo", "GraphQL", "Node.js"],
             projectUrl: "https://github.com/Remma27/GraphQLJobListingPlatform",
         },
         {
-            title: "Job Search Platform",
+            title: "Plataforma de Búsqueda de Empleo",
             description: "Aplicación web con funcionalidades para solicitantes de empleo y empleadores, incluyendo perfiles, publicaciones y búsqueda de trabajos.",
             technologies: ["MongoDB", "HTML", "CSS", "JavaScript"],
             projectUrl: "https://github.com/Remma27/job-search-platform",
             videoUrl: "https://estuutnac-my.sharepoint.com/:v:/g/personal/emrodriguezso_est_utn_ac_cr/EQiQ-SXCexFBoq2iqbQvlXMBMewMXNIl3ofLSSTRzEaHPg?e=uxpVqp"
         },
         {
-            title: "Graphic Designer Portfolio",
+            title: "Portafolio para Diseñador Gráfico",
             description: "Portafolio web de una sola página para un diseñador gráfico, con secciones de 'Acerca de', 'Proyectos', formulario de contacto y enlaces a redes sociales.",
             technologies: ["HTML", "CSS", "JavaScript"],
             projectUrl: "https://github.com/Remma27/graphic-designer-portfolio",
             pageUrl: "https://remma27.github.io/graphic-designer-portfolio/"
         },
         {
-            title: "Angular Rick and Morty App",
+            title: "Aplicación de Rick y Morty con Angular",
             description: "Aplicación web que consume la API de Rick and Morty para mostrar información sobre personajes, episodios y ubicaciones de la serie.",
             technologies: ["Angular", "JavaScript"],
             projectUrl: "https://github.com/Remma27/angular-rick-and-morty",
         },
         {
-            title: "Student Service Web",
+            title: "Servicio Estudiantil Web",
             description: "Aplicación web para estudiantes y personal universitario, diseñada para registrar objetos perdidos y llevar un control del uso de computadoras en las clases.",
             technologies: ["Angular", "MongoDB"],
             projectUrl: "https://github.com/utn-integrador-III/student-service-web/tree/dev",
         },
     ];
-
 
     const education = [
         {
@@ -275,14 +299,17 @@ const Portfolio = () => {
         {
             title: "CCNAv7 III TI 3-2023 - G",
             issuer: "Cisco",
+            description: "Certificación de Cisco que cubre conceptos avanzados de redes, incluyendo la configuración y resolución de problemas en redes complejas. Este nivel profundiza en temas como OSPF avanzado, seguridad en redes, y automatización de redes con herramientas como Python y APIs RESTful."
         },
         {
             title: "CCNAv7 II TI 2-2023 - F",
             issuer: "Cisco",
+            description: "Certificación de Cisco centrada en la configuración y administración de redes de nivel intermedio. Incluye conceptos como la implementación de VLANs, RSTP, DHCP, NAT, y la configuración básica de enrutamiento dinámico con OSPF en redes pequeñas y medianas."
         },
         {
             title: "CCNAv7 I TI 1-2023 - A",
             issuer: "Cisco",
+            description: "Certificación de nivel inicial de Cisco que introduce los fundamentos de redes, incluyendo el modelo OSI, direccionamiento IP, y la configuración básica de dispositivos de red como switches y routers. Este certificado proporciona una base sólida para la comprensión de los conceptos básicos de redes."
         },
     ];
 
@@ -308,6 +335,15 @@ const Portfolio = () => {
         }
     };
 
+    const navItems = [
+        { id: 'about', title: 'Sobre Mí' },
+        { id: 'skills', title: 'Habilidades' },
+        { id: 'projects', title: 'Proyectos' },
+        { id: 'education', title: 'Educación' },
+        { id: 'certificates', title: 'Certificados' },
+        { id: 'contact', title: 'Contacto' }
+    ];
+
     return (
         <div className="bg-gray-900 text-green-300 min-h-screen relative">
             <nav className="bg-gray-800 p-4 sticky top-0 z-50 shadow-lg transition-all duration-300">
@@ -316,16 +352,16 @@ const Portfolio = () => {
 
                     {/* Menu for larger screens */}
                     <div className="hidden md:flex space-x-4">
-                        {['about', 'skills', 'projects', 'education', 'certificates', 'contact'].map((item) => (
-                            <motion.a
-                                key={item}
-                                href={`#${item}`}
+                        {navItems.map((item) => (
+                            <motion.button
+                                key={item.id}
+                                onClick={() => scrollToSection(item.id)}
                                 className="hover:text-green-500 transition-colors duration-300"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {item.charAt(0).toUpperCase() + item.slice(1)}
-                            </motion.a>
+                                {item.title}
+                            </motion.button>
                         ))}
                     </div>
 
@@ -348,16 +384,15 @@ const Portfolio = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                         >
-                            {['about', 'skills', 'projects', 'education', 'certificates', 'contact'].map((item) => (
-                                <motion.a
-                                    key={item}
-                                    href={`#${item}`}
-                                    className="block py-2 hover:text-green-500 transition-colors duration-300"
+                            {navItems.map((item) => (
+                                <motion.button
+                                    key={item.id}
+                                    onClick={() => scrollToSection(item.id)}
+                                    className="block py-2 hover:text-green-500 transition-colors duration-300 text-left"
                                     whileHover={{ x: 10 }}
-                                    onClick={() => setIsMenuOpen(false)} // Close the menu on link click
                                 >
-                                    {item.charAt(0).toUpperCase() + item.slice(1)}
-                                </motion.a>
+                                    {item.title}
+                                </motion.button>
                             ))}
                         </motion.div>
                     )}
