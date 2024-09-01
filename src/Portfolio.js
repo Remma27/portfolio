@@ -159,15 +159,6 @@ const Portfolio = () => {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowScrollTop(window.scrollY > 300);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -561,12 +552,11 @@ const Portfolio = () => {
                         className="fixed bottom-6 right-6 bg-green-600 text-white p-3 rounded-full shadow-lg"
                         onClick={scrollToTop}
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: showScrollTop ? 1 : 0, y: showScrollTop ? 0 : 20 }}
                         exit={{ opacity: 0, y: 20 }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
                     >
-                        <ChevronUp />
+                        <ChevronUp className="w-6 h-6" />
                     </motion.button>
                 )}
             </AnimatePresence>
