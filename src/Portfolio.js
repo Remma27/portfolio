@@ -262,9 +262,11 @@ const Portfolio = () => {
         },
         {
             title: "Servicio Estudiantil Web",
-            description: "Aplicación web para estudiantes y personal universitario, diseñada para registrar objetos perdidos y llevar un control del uso de computadoras en las clases.",
+            description: "Aplicación web para registrar objetos perdidos y gestionar el uso de computadoras en clases, conectada a APIs desarrolladas en el proyecto con metodología Scrum.",
             technologies: ["Angular", "MongoDB"],
             projectUrl: "https://github.com/utn-integrador-III/student-service-web/tree/dev",
+            pageUrl: "https://remma27.github.io/student-service-web/home",
+            videoUrl: "https://youtu.be/oBNZt-JRMcs"
         },
     ];
 
