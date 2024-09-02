@@ -238,7 +238,7 @@ const Portfolio = () => {
             title: "Job Listing Platform with GraphQL",
             description: "Digital inventory management platform for professionals in the Pacific region of Costa Rica, using GraphQL and MongoDB.",
             technologies: ["MongoDB", "Apollo", "GraphQL", "Node.js"],
-            projectUrl: "https://github.com/Remma27/GraphQLJobListingPlatform",
+            projectUrl: "https://github.com/Remma27/graphql-job-listing-platform",
         },
         {
             title: "Job Search Platform",
@@ -258,7 +258,7 @@ const Portfolio = () => {
             title: "Rick and Morty App with Angular",
             description: "Web application that consumes the Rick and Morty API to display information about the show's characters, episodes, and locations.",
             technologies: ["Angular", "JavaScript"],
-            projectUrl: "https://github.com/Remma27/angular-rick-and-morty",
+            projectUrl: "https://github.com/Remma27/AngularRickandMortyApp",
         },
         {
             title: "Student Service Web",
