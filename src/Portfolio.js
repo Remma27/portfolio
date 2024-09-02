@@ -392,7 +392,7 @@ const Portfolio = () => {
                 </AnimatePresence>
             </nav>
 
-            <main className="container mx-auto p-4 max-w-4xl">
+            <main className="container mx-auto p-4 max-w-6xl">
                 <motion.section
                     id="about"
                     className="my-8 text-center"
