@@ -99,7 +99,7 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
         <div className="p-4 flex flex-col h-full">
             <h3 className="text-xl font-semibold mb-2 text-lg">{title}</h3>
-            <p className="text-green-200 mb-4 flex-grow overflow-y-auto">
+            <p className="text-white mb-4 flex-grow overflow-y-auto">
                 {description}
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
@@ -108,9 +108,9 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
                 ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-                <ActionButton href={projectUrl} label="Repositorio" color="green" />
-                {videoUrl && <ActionButton href={videoUrl} label="Video" color="blue" />}
-                {pageUrl && <ActionButton href={pageUrl} label="Página" color="purple" />}
+                <ActionButton href={projectUrl} label="Repositorio" color="orange" />
+                {videoUrl && <ActionButton href={videoUrl} label="Video" color="orange" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Página" color="orange" />}
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@ const ActionButton = ({ href, label, color }) => (
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-700 transition-colors text-sm`}
+        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-400 transition-colors text-sm`}
     >
         {label} <ExternalLink className="ml-1 w-4 h-4" />
     </a>
@@ -130,16 +130,16 @@ const ActionButton = ({ href, label, color }) => (
 const EducationCard = ({ title, institution, period }) => (
     <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px] h-full">
         <h3 className="text-xl font-semibold">{title}</h3>
-        <p className="text-green-400">{institution}</p>
-        <p className="text-green-200">{period}</p>
+        <p className="text-white">{institution}</p>
+        <p className="text-white">{period}</p>
     </div>
 );
 
 const CertificateCard = ({ title, issuer, description }) => (
     <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px] h-full">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-green-400">{issuer}</p>
-        <p className="text-green-200">{description}</p>
+        <p className="text-white">{issuer}</p>
+        <p className="text-white">{description}</p>
     </div>
 );
 
@@ -338,10 +338,10 @@ const Portfolio = () => {
     ];
 
     return (
-        <div className="bg-gray-900 text-green-300 min-h-screen relative">
+        <div className="bg-gray-900 text-white min-h-screen relative">
             <nav className="bg-gray-800 p-4 sticky top-0 z-50 shadow-lg transition-all duration-300">
                 <div className="container mx-auto flex justify-between items-center">
-                    <h1 className="text-2xl font-bold text-green-400">Emmanuel Rodríguez</h1>
+                    <h1 className="text-2xl font-bold text-white">Emmanuel Rodríguez</h1>
 
                     {/* Menu for larger screens */}
                     <div className="hidden md:flex space-x-4">
@@ -400,15 +400,15 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-4 text-green-400" variants={itemVariants}>Sobre mí</motion.h2>
-                    <motion.p className="text-green-200 mb-4" variants={itemVariants}>
+                    <motion.h2 className="text-3xl font-bold mb-4 text-sky-500" variants={itemVariants}>Sobre mí</motion.h2>
+                    <motion.p className="text-white mb-4" variants={itemVariants}>
                         Soy un estudiante de Ingeniería en Tecnologías de la Información con enfoque en desarrollo web full-stack.
                         Me caracterizo por mi atención al detalle y enfoque analítico en la resolución de problemas.
                     </motion.p>
                     <motion.a
                         href="https://estuutnac-my.sharepoint.com/:b:/g/personal/emrodriguezso_est_utn_ac_cr/ETBF9VtC3ShOgF4FoGxJfX8BHj3D7ed54S-yTbJRmL9z2g?e=uc5cDB"
                         download
-                        className="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
+                        className="inline-flex items-center bg-orange-400 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
                         target="_blank" rel="noopener noreferrer"
                         variants={itemVariants}
                         whileHover={{ scale: 1.05 }}
@@ -425,7 +425,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-green-400" variants={itemVariants}>Habilidades Técnicas</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Habilidades Técnicas</motion.h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {Object.entries(technologiesByCategory).map(([category, technologies]) => (
                             <motion.div key={category} variants={itemVariants}>
@@ -442,7 +442,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-green-400" variants={itemVariants}>Habilidades Blandas</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Habilidades Blandas</motion.h2>
                     <div className="flex flex-wrap justify-center gap-4">
                         {softSkills.map((skill, index) => (
                             <motion.div
@@ -464,7 +464,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-green-400" variants={itemVariants}>Proyectos Destacados</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Proyectos</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {projects.map((project, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -489,7 +489,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-green-400" variants={itemVariants}>Educación</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Educación</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {education.map((edu, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -506,7 +506,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-green-400" variants={itemVariants}>Certificados</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Certificados</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {certificates.map((cert, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -523,7 +523,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-green-400" variants={itemVariants}>Contacto</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-sky-500" variants={itemVariants}>Contacto</motion.h2>
                     <div className="flex flex-col items-center space-y-2">
                         {[
                             { href: "tel:+50672149100", icon: <Phone className="mr-2" />, text: "(+506) 72149100" },
@@ -534,7 +534,7 @@ const Portfolio = () => {
                             <motion.a
                                 key={index}
                                 href={item.href}
-                                className="flex items-center text-green-200 hover:text-green-500 transition-colors duration-300"
+                                className="flex items-center text-white hover:text-green-500 transition-colors duration-300"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variants={itemVariants}
@@ -563,7 +563,7 @@ const Portfolio = () => {
                 )}
             </AnimatePresence>
 
-            <footer className="bg-gray-800 text-center p-4 text-green-200">
+            <footer className="bg-gray-800 text-center p-4 text-white">
                 <p>&copy; 2024 Emmanuel Rodríguez Solano.</p>
             </footer>
         </div>
