@@ -108,20 +108,20 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
                 ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-                <ActionButton href={projectUrl} label="Repositorio" color="green" />
-                {videoUrl && <ActionButton href={videoUrl} label="Video" color="blue" />}
-                {pageUrl && <ActionButton href={pageUrl} label="Página" color="purple" />}
+                <ActionButton href={projectUrl} label="Repositorio" className="bg-sky-500 hover:bg-sky-600" />
+                {videoUrl && <ActionButton href={videoUrl} label="Video" className="bg-green-500 hover:bg-green-600" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Página" className="bg-orange-500 hover:bg-orange-600" />}
             </div>
         </div>
     </div>
 );
 
-const ActionButton = ({ href, label, color }) => (
+const ActionButton = ({ href, label, className }) => (
     <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-700 transition-colors text-sm`}
+        className={`inline-flex items-center text-white px-3 py-2 rounded transition-colors duration-200 ease-in-out text-sm ${className}`}
     >
         {label} <ExternalLink className="ml-1 w-4 h-4" />
     </a>
@@ -349,7 +349,7 @@ const Portfolio = () => {
                             <motion.button
                                 key={item.id}
                                 onClick={() => scrollToSection(item.id)}
-                                className="hover:text-green-500 transition-colors duration-300"
+                                className="hover:text-sky-500 transition-colors duration-300"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -361,7 +361,7 @@ const Portfolio = () => {
                     {/* Hamburger button for smaller screens */}
                     <motion.button
                         onClick={toggleMenu}
-                        className="md:hidden text-green-400"
+                        className="md:hidden text-sky-400"
                         whileTap={{ scale: 0.95 }}
                     >
                         {isMenuOpen ? <X /> : <Menu />}
@@ -381,7 +381,7 @@ const Portfolio = () => {
                                 <motion.button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
-                                    className="block py-2 hover:text-green-500 transition-colors duration-300 text-left"
+                                    className="block py-2 hover:text-sky-500 transition-colors duration-300 text-left"
                                     whileHover={{ x: 10 }}
                                 >
                                     {item.title}
@@ -534,7 +534,7 @@ const Portfolio = () => {
                             <motion.a
                                 key={index}
                                 href={item.href}
-                                className="flex items-center text-white hover:text-green-500 transition-colors duration-300"
+                                className="flex items-center text-white hover:text-sky-500 transition-colors duration-300"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variants={itemVariants}
