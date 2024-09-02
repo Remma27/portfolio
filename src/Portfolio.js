@@ -108,9 +108,9 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
                 ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-                <ActionButton href={projectUrl} label="Repositorio" className="bg-sky-500 hover:bg-sky-600" />
+                <ActionButton href={projectUrl} label="Repository" className="bg-sky-500 hover:bg-sky-600" />
                 {videoUrl && <ActionButton href={videoUrl} label="Video" className="bg-green-500 hover:bg-green-600" />}
-                {pageUrl && <ActionButton href={pageUrl} label="Página" className="bg-orange-500 hover:bg-orange-600" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Page" className="bg-orange-500 hover:bg-orange-600" />}
             </div>
         </div>
     </div>
