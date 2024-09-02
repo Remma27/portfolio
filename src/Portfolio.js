@@ -468,7 +468,6 @@ const Portfolio = () => {
                         {projects.map((project, index) => (
                             <motion.div key={index} variants={itemVariants}>
                                 <ProjectCard
-                                    key={index}
                                     title={project.title}
                                     description={project.description}
                                     technologies={project.technologies}
@@ -565,8 +564,12 @@ const Portfolio = () => {
             <footer className="bg-gray-800 text-center p-4 text-white">
                 <p>&copy; 2024 Emmanuel Rodríguez Solano.</p>
             </footer>
+
+            {/* Google Translate Element */}
+            <div id="google_translate_element" style={{ position: 'fixed', bottom: '10px', right: '10px', zIndex: 1000 }}></div>
         </div>
     );
 };
+
 
 export default Portfolio;
