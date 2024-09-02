@@ -99,7 +99,7 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
         <div className="p-4 flex flex-col h-full">
             <h3 className="text-xl font-semibold mb-2 text-lg">{title}</h3>
-            <p className="text-white mb-4 flex-grow overflow-y-auto">
+            <p className="text-white-200 mb-4 flex-grow overflow-y-auto">
                 {description}
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
@@ -108,9 +108,9 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
                 ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-                <ActionButton href={projectUrl} label="Repositorio" color="orange" />
-                {videoUrl && <ActionButton href={videoUrl} label="Video" color="orange" />}
-                {pageUrl && <ActionButton href={pageUrl} label="Página" color="orange" />}
+                <ActionButton href={projectUrl} label="Repositorio" color="green" />
+                {videoUrl && <ActionButton href={videoUrl} label="Video" color="blue" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Página" color="purple" />}
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@ const ActionButton = ({ href, label, color }) => (
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-400 transition-colors text-sm`}
+        className={`inline-flex items-center bg-${color}-600 text-white px-3 py-2 rounded hover:bg-${color}-700 transition-colors text-sm`}
     >
         {label} <ExternalLink className="ml-1 w-4 h-4" />
     </a>
@@ -408,7 +408,7 @@ const Portfolio = () => {
                     <motion.a
                         href="https://estuutnac-my.sharepoint.com/:b:/g/personal/emrodriguezso_est_utn_ac_cr/ETBF9VtC3ShOgF4FoGxJfX8BHj3D7ed54S-yTbJRmL9z2g?e=uc5cDB"
                         download
-                        className="inline-flex items-center bg-orange-400 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors duration-300"
+                        className="inline-flex items-center bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600 transition-colors duration-300"
                         target="_blank" rel="noopener noreferrer"
                         variants={itemVariants}
                         whileHover={{ scale: 1.05 }}
@@ -551,7 +551,7 @@ const Portfolio = () => {
             <AnimatePresence>
                 {showScrollTop && (
                     <motion.button
-                        className="fixed bottom-6 right-6 bg-green-600 text-white p-3 rounded-full shadow-lg"
+                        className="fixed bottom-6 right-6 bg-sky-500 text-white p-3 rounded-full shadow-lg"
                         onClick={scrollToTop}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: showScrollTop ? 1 : 0, y: showScrollTop ? 0 : 20 }}
