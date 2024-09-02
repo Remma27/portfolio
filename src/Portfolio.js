@@ -44,7 +44,7 @@ const getTechIcon = (tech) => {
         'GraphQL': '🔍',
         'Apollo': '🚀',
         'PokeAPI': '🔎',
-        'Kotlin': '🅺', // Icono para Kotlin
+        'Kotlin': '🅺',
     };
     return icons[tech] || '🔹';
 };
@@ -170,7 +170,7 @@ const Portfolio = () => {
         const section = document.getElementById(sectionId);
         if (section) {
             const navHeight = document.querySelector('nav').offsetHeight;
-            const sectionTop = section.offsetTop - navHeight - 20; // 20px extra padding
+            const sectionTop = section.offsetTop - navHeight - 20;
             window.scrollTo({
                 top: sectionTop,
                 behavior: 'smooth'
@@ -180,89 +180,89 @@ const Portfolio = () => {
     };
 
     const technologiesByCategory = {
-        'Lenguajes de Programación': ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
-        'Frameworks y Librerías': ['React', 'Angular', 'Express.js'],
-        'Desarrollo Móvil': ['Android Studio', 'React Native'],
-        'Bases de Datos': ['MongoDB', 'MySQL', 'SQL', 'Oracle'],
-        'Tecnologías Cloud': ['AWS'],
-        'Control de Versiones': ['Git', 'GitHub'],
-        'Sistemas Operativos': ['Windows', 'Linux'],
-        'Otros': ['Node.js', 'Firebase', 'APIs RESTful'],
+        'Programming Languages': ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
+        'Frameworks and Libraries': ['React', 'Angular', 'Express.js'],
+        'Mobile Development': ['Android Studio', 'React Native'],
+        'Databases': ['MongoDB', 'MySQL', 'SQL', 'Oracle'],
+        'Cloud Technologies': ['AWS'],
+        'Version Control': ['Git', 'GitHub'],
+        'Operating Systems': ['Windows', 'Linux'],
+        'Others': ['Node.js', 'Firebase', 'RESTful APIs'],
     };
 
     const softSkills = [
-        'Análisis detallado',
-        'Enfoque en la calidad',
-        'Resolución de problemas',
-        'Pensamiento crítico',
-        'Orientación a resultados',
-        'Atención al detalle',
-        'Toma de decisiones basada en datos',
-        'Perseverancia',
+        'Detailed Analysis',
+        'Focus on Quality',
+        'Problem Solving',
+        'Critical Thinking',
+        'Results Orientation',
+        'Attention to Detail',
+        'Data-Driven Decision Making',
+        'Perseverance',
     ];
 
     const projects = [
         {
-            title: "Aplicación de Bienestar Estudiantil",
-            description: "Aplicación web diseñada para gestionar y registrar actividades de apoyo al bienestar estudiantil.",
+            title: "Student Welfare Application",
+            description: "Web application designed to manage and record student welfare support activities.",
             technologies: ["Angular", "Node.js", "MySQL", "Express.js"],
             projectUrl: "https://github.com/Remma27/StudentWelfareApp",
         },
         {
-            title: "Portal de Investigación con Firebase",
-            description: "Portal web para la gestión de proyectos de investigación estudiantil, utilizando Firebase como backend.",
+            title: "Research Portal with Firebase",
+            description: "Web portal for managing student research projects, using Firebase as a backend.",
             technologies: ["Firebase", "React", "JavaScript"],
             projectUrl: "https://github.com/Remma27/FirebaseResearchPortal/tree/main",
             videoUrl: "https://youtu.be/w1rQoe08cd8",
         },
         {
-            title: "Investigación Estudiantil Android",
-            description: "Aplicación Android para administrar proyectos de investigación estudiantil desde dispositivos móviles.",
+            title: "Student Research Android",
+            description: "Android application to manage student research projects from mobile devices.",
             technologies: ["Android Studio", "Kotlin", "Firebase"],
             projectUrl: "https://github.com/Remma27/StudentResearchAndroid",
             videoUrl: "https://youtu.be/w1rQoe08cd8",
         },
         {
             title: "Pokedex",
-            description: "Aplicación móvil que simula una Pokedex, permitiendo explorar información detallada sobre diferentes Pokémon.",
+            description: "Mobile application that simulates a Pokedex, allowing users to explore detailed information about different Pokémon.",
             technologies: ["React Native", "JavaScript", "PokeAPI"],
             projectUrl: "https://github.com/Remma27/Pokedex",
         },
         {
-            title: "Inicio de Sesión con React Native y Firebase",
-            description: "Sistema de autenticación en aplicaciones móviles desarrollado con React Native y Firebase.",
+            title: "Login with React Native and Firebase",
+            description: "Authentication system in mobile applications developed with React Native and Firebase.",
             technologies: ["React Native", "Firebase", "JavaScript"],
             projectUrl: "https://github.com/Remma27/LoginReactNativeFirebase",
         },
         {
-            title: "Plataforma de Listado de Trabajos con GraphQL",
-            description: "Plataforma de gestión de inventario digital para profesionales en la región del Pacífico de Costa Rica, utilizando GraphQL y MongoDB.",
+            title: "Job Listing Platform with GraphQL",
+            description: "Digital inventory management platform for professionals in the Pacific region of Costa Rica, using GraphQL and MongoDB.",
             technologies: ["MongoDB", "Apollo", "GraphQL", "Node.js"],
             projectUrl: "https://github.com/Remma27/GraphQLJobListingPlatform",
         },
         {
-            title: "Plataforma de Búsqueda de Empleo",
-            description: "Aplicación web con funcionalidades para solicitantes de empleo y empleadores, incluyendo perfiles, publicaciones y búsqueda de trabajos.",
+            title: "Job Search Platform",
+            description: "Web application with features for job seekers and employers, including profiles, postings, and job search.",
             technologies: ["MongoDB", "HTML", "CSS", "JavaScript"],
             projectUrl: "https://github.com/Remma27/job-search-platform",
             videoUrl: "https://estuutnac-my.sharepoint.com/:v:/g/personal/emrodriguezso_est_utn_ac_cr/EQiQ-SXCexFBoq2iqbQvlXMBMewMXNIl3ofLSSTRzEaHPg?e=uxpVqp"
         },
         {
-            title: "Portafolio para Diseñador Gráfico",
-            description: "Portafolio web de una sola página para un diseñador gráfico, con secciones de 'Acerca de', 'Proyectos', formulario de contacto y enlaces a redes sociales.",
+            title: "Graphic Designer Portfolio",
+            description: "Single-page web portfolio for a graphic designer, featuring 'About', 'Projects' sections, a contact form, and social media links.",
             technologies: ["HTML", "CSS", "JavaScript"],
             projectUrl: "https://github.com/Remma27/graphic-designer-portfolio",
             pageUrl: "https://remma27.github.io/graphic-designer-portfolio/"
         },
         {
-            title: "Aplicación de Rick y Morty con Angular",
-            description: "Aplicación web que consume la API de Rick and Morty para mostrar información sobre personajes, episodios y ubicaciones de la serie.",
+            title: "Rick and Morty App with Angular",
+            description: "Web application that consumes the Rick and Morty API to display information about the show's characters, episodes, and locations.",
             technologies: ["Angular", "JavaScript"],
             projectUrl: "https://github.com/Remma27/angular-rick-and-morty",
         },
         {
-            title: "Servicio Estudiantil Web",
-            description: "Aplicación web para registrar objetos perdidos y gestionar el uso de computadoras en clases, conectada a APIs desarrolladas en el proyecto con metodología Scrum.",
+            title: "Student Service Web",
+            description: "Web application to register lost items and manage computer usage in classes, connected to APIs developed in the project using the Scrum methodology.",
             technologies: ["Angular", "MongoDB"],
             projectUrl: "https://github.com/utn-integrador-III/student-service-web/tree/dev",
             pageUrl: "https://remma27.github.io/student-service-web/home",
@@ -272,19 +272,19 @@ const Portfolio = () => {
 
     const education = [
         {
-            title: "Bachillerato en Ingeniería en Tecnologías de la Información",
-            institution: "Universidad Técnica Nacional",
-            period: "Mayo 2024 - Presente",
+            title: "Bachelor's in Information Technology Engineering",
+            institution: "National Technical University",
+            period: "May 2024 - Present",
         },
         {
-            title: "Diplomado Universitario en Ingeniería en Tecnologías de la Información",
-            institution: "Universidad Técnica Nacional",
-            period: "Enero 2022 – Mayo 2024",
+            title: "University Diploma in Information Technology Engineering",
+            institution: "National Technical University",
+            period: "January 2022 – May 2024",
         },
         {
-            title: "Tecnico Medio en Contabilidad",
-            institution: "Colegio Técnico Profesional de Puntarenas",
-            period: "Enero 2019 – Diciembre 2021",
+            title: "Technical Diploma in Accounting",
+            institution: "Puntarenas Technical Vocational School",
+            period: "January 2019 – December 2021",
         },
     ];
 
@@ -292,17 +292,17 @@ const Portfolio = () => {
         {
             title: "CCNAv7 III TI 3-2023 - G",
             issuer: "Cisco",
-            description: "Certificación de Cisco que cubre conceptos avanzados de redes, incluyendo la configuración y resolución de problemas en redes complejas. Este nivel profundiza en temas como OSPF avanzado, seguridad en redes, y automatización de redes con herramientas como Python y APIs RESTful."
+            description: "Cisco certification covering advanced networking concepts, including the configuration and troubleshooting of complex networks. This level delves into topics such as advanced OSPF, network security, and network automation with tools like Python and RESTful APIs."
         },
         {
             title: "CCNAv7 II TI 2-2023 - F",
             issuer: "Cisco",
-            description: "Certificación de Cisco centrada en la configuración y administración de redes de nivel intermedio. Incluye conceptos como la implementación de VLANs, RSTP, DHCP, NAT, y la configuración básica de enrutamiento dinámico con OSPF en redes pequeñas y medianas."
+            description: "Cisco certification focused on the configuration and management of intermediate-level networks. It includes concepts like VLAN implementation, RSTP, DHCP, NAT, and basic dynamic routing configuration with OSPF in small and medium-sized networks."
         },
         {
             title: "CCNAv7 I TI 1-2023 - A",
             issuer: "Cisco",
-            description: "Certificación de nivel inicial de Cisco que introduce los fundamentos de redes, incluyendo el modelo OSI, direccionamiento IP, y la configuración básica de dispositivos de red como switches y routers. Este certificado proporciona una base sólida para la comprensión de los conceptos básicos de redes."
+            description: "Cisco entry-level certification introducing networking fundamentals, including the OSI model, IP addressing, and the basic configuration of network devices like switches and routers. This certificate provides a solid foundation for understanding basic networking concepts."
         },
     ];
 
@@ -329,12 +329,12 @@ const Portfolio = () => {
     };
 
     const navItems = [
-        { id: 'about', title: 'Sobre Mí' },
-        { id: 'skills', title: 'Habilidades' },
-        { id: 'projects', title: 'Proyectos' },
-        { id: 'education', title: 'Educación' },
-        { id: 'certificates', title: 'Certificados' },
-        { id: 'contact', title: 'Contacto' }
+        { id: 'about', title: 'About' },
+        { id: 'skills', title: 'Skills' },
+        { id: 'projects', title: 'Projects' },
+        { id: 'education', title: 'Education' },
+        { id: 'certificates', title: 'Certificates' },
+        { id: 'contact', title: 'Contact' }
     ];
 
     return (
@@ -400,10 +400,9 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-4 text-sky-500" variants={itemVariants}>Sobre mí</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-4 text-sky-500" variants={itemVariants}>About me</motion.h2>
                     <motion.p className="text-white mb-4" variants={itemVariants}>
-                        Soy un estudiante de Ingeniería en Tecnologías de la Información con enfoque en desarrollo web full-stack.
-                        Me caracterizo por mi atención al detalle y enfoque analítico en la resolución de problemas.
+                        I'm an Information Technology Engineering student with a focus on full-stack web development. I am known for my attention to detail and analytical approach to problem-solving.
                     </motion.p>
                     <motion.a
                         href="https://estuutnac-my.sharepoint.com/:b:/g/personal/emrodriguezso_est_utn_ac_cr/ETBF9VtC3ShOgF4FoGxJfX8BHj3D7ed54S-yTbJRmL9z2g?e=uc5cDB"
@@ -414,7 +413,7 @@ const Portfolio = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        Descargar CV <Download className="ml-2 w-4 h-4" />
+                        Download CV <Download className="ml-2 w-4 h-4" />
                     </motion.a>
                 </motion.section>
 
@@ -425,7 +424,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Habilidades Técnicas</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Technical Skills</motion.h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {Object.entries(technologiesByCategory).map(([category, technologies]) => (
                             <motion.div key={category} variants={itemVariants}>
@@ -442,7 +441,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Habilidades Blandas</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Soft Skills</motion.h2>
                     <div className="flex flex-wrap justify-center gap-4">
                         {softSkills.map((skill, index) => (
                             <motion.div
@@ -464,7 +463,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Proyectos</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Projects</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {projects.map((project, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -489,7 +488,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Educación</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Education</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {education.map((edu, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -506,7 +505,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Certificados</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Certificates</motion.h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {certificates.map((cert, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -523,7 +522,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 className="text-3xl font-bold mb-6 text-sky-500" variants={itemVariants}>Contacto</motion.h2>
+                    <motion.h2 className="text-3xl font-bold mb-6 text-sky-500" variants={itemVariants}>Contact</motion.h2>
                     <div className="flex flex-col items-center space-y-2">
                         {[
                             { href: "tel:+50672149100", icon: <Phone className="mr-2" />, text: "(+506) 72149100" },
