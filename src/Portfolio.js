@@ -273,17 +273,17 @@ const Portfolio = () => {
     const education = [
         {
             title: "Bachelor's in Information Technology Engineering",
-            institution: "National Technical University",
+            institution: "Universidad Tecnica Nacional",
             period: "May 2024 - Present",
         },
         {
             title: "University Diploma in Information Technology Engineering",
-            institution: "National Technical University",
+            institution: "Universidad Tecnica Nacional",
             period: "January 2022 – May 2024",
         },
         {
             title: "Technical Diploma in Accounting",
-            institution: "Puntarenas Technical Vocational School",
+            institution: "Colegio Tecnico Profesional de Puntarenas",
             period: "January 2019 – December 2021",
         },
     ];
