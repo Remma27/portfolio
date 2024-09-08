@@ -268,6 +268,13 @@ const Portfolio = () => {
             pageUrl: "https://remma27.github.io/student-service-web/home",
             videoUrl: "https://youtu.be/oBNZt-JRMcs"
         },
+        {
+            title: "Balance Game Simulation",
+            description: "Develop a React-Native app to simulate a balance game. The app should randomly calculate material weights.",
+            technologies: ["React Native", "JavaScript"],
+            projectUrl: "https://github.com/Remma27/JuegoBalanzas",
+            videoUrl: "https://www.youtube.com/watch?v=MoaCqE_rXYY"
+        },
     ];
 
     const education = [
