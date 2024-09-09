@@ -98,7 +98,7 @@ const TechCategory = ({ category, technologies }) => (
 const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, pageUrl }) => (
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
         <div className="p-4 flex flex-col h-full">
-            <h3 className="text-xl font-semibold mb-2 text-lg">{title}</h3>
+            <h3 className="text-xl font-semibold mb-2">{title}</h3>
             <p className="text-white-200 mb-4 flex-grow overflow-y-auto">
                 {description}
             </p>
