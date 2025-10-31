@@ -347,7 +347,7 @@ const Portfolio = () => {
             title: "Full-Stack Web Developer",
             institution: "Comercializadora Inter Global, Interglo S.L.R.",
             period: "April 2025 - Present",
-            description: "Developing and maintaining full-stack web applications using modern technologies like React, Node.js, and databases. Collaborating on projects to deliver high-quality software solutions.",
+            description: "Developing and maintaining full-stack web applications using modern technologies like ASP.NET, C#, and MYSQL. Collaborating on projects to deliver high-quality software solutions.",
         },
         {
             title: "Internship at Interglo",
