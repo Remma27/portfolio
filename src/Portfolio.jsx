@@ -16,13 +16,14 @@ const TechIcon = ({ name }) => {
 
 const getTechIcon = (tech) => {
     const icons = {
+        'ASP.NET': '🌐',
+        'C#': '💠',
         'JavaScript': '🟨',
         'TypeScript': '🔷',
         'Python': '🐍',
         'Java': '☕',
         'React': '⚛️',
         'Angular': '🅰️',
-        'Express.js': '🚀',
         'Node.js': '🟢',
         'MongoDB': '🍃',
         'MySQL': '🐬',
@@ -30,14 +31,12 @@ const getTechIcon = (tech) => {
         'Oracle': '🔶',
         'Firebase': '🔥',
         'AWS': '☁️',
-        'Git': '🔧',
+        'Azure': '🔷',
         'GitHub': '🐙',
         'Android Studio': '🤖',
         'React Native': '📱',
         'HTML': '🌐',
         'CSS': '🎨',
-        'jQuery': '🛠️',
-        'RxJS': '🔬',
         'Windows': '🪟',
         'Linux': '🐧',
         'APIs RESTful': '🔗',
@@ -99,7 +98,7 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col h-full">
         <div className="p-4 flex flex-col h-full">
             <h3 className="text-xl font-semibold mb-2">{title}</h3>
-            <p className="text-white-200 mb-4 flex-grow overflow-y-auto">
+            <p className="text-white-200 mb-4 grow overflow-y-auto">
                 {description}
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
@@ -143,6 +142,15 @@ const CertificateCard = ({ title, issuer, description }) => (
     </div>
 );
 
+const ExperienceCard = ({ title, institution, period, description }) => (
+    <div className="bg-gray-800 rounded-lg p-4 shadow-lg flex flex-col justify-between min-h-[200px] h-full">
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-white">{institution}</p>
+        <p className="text-white">{period}</p>
+        <p className="text-white">{description}</p>
+    </div>
+);
+
 const Portfolio = () => {
     useEffect(() => {
         const handleScroll = () => {
@@ -180,15 +188,15 @@ const Portfolio = () => {
     };
 
     const technologiesByCategory = {
-        'Programming Languages': ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
-        'Frameworks and Libraries': ['React', 'Angular', 'Express.js'],
+        'Programming Languages': ['C#', 'JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
+        'Frameworks and Libraries': ['ASP.NET', 'React', 'Angular', 'Express.js'],
         'Mobile Development': ['Android Studio', 'React Native'],
-        'Databases': ['MongoDB', 'MySQL', 'SQL', 'Oracle'],
-        'Cloud Technologies': ['AWS'],
+        Databases: ['MySQL','MongoDB', 'SQL', 'Oracle'],
+        'Cloud Technologies': ['Azure','AWS'],
         'Version Control': ['Git', 'GitHub'],
         'Operating Systems': ['Windows', 'Linux'],
-        'Others': ['Node.js', 'Firebase', 'RESTful APIs'],
-    };
+        Others: ['Node.js', 'Firebase', 'RESTful APIs'],
+    }
 
     const softSkills = [
         'Detailed Analysis',
@@ -202,6 +210,18 @@ const Portfolio = () => {
     ];
 
     const projects = [
+        {
+            title: "Centralized Business Portal with ASP.NET",
+            description: "Web application for centralized management of business information, including users, roles, permissions, and modules for viewing machinery downtime connected via ODBC to a HANNA database. Also includes a Pest Control module with QR code generation and readings, route management, and reports.",
+            technologies: ["ASP.NET", "C#", "JavaScript", "MySQL", "HTML", "CSS", "ODBC", "QR Codes"],
+            projectUrl: "https://github.com/Remma27/Interglo",
+        },
+        {
+            title: "Rice Import System with ASP.NET",
+            description: "Web application to record the movements and weighings of rice import trucks unloaded from ships, organized by different companies, with user accounts, roles, and permissions. With the creation of a RESTful API for data management.",
+            technologies: ["ASP.NET", "C#", "JavaScript", "MySQL", "HTML", "CSS", "APIs RESTful"],
+            projectUrl: "https://github.com/Remma27/SistemaImportaciones",
+        },
         {
             title: "Student Welfare Application",
             description: "Web application designed to manage and record student welfare support activities.",
@@ -281,7 +301,7 @@ const Portfolio = () => {
         {
             title: "Bachelor's in Information Technology Engineering",
             institution: "Universidad Tecnica Nacional",
-            period: "May 2024 - Present",
+            period: "May 2024 - May 2025",
         },
         {
             title: "University Diploma in Information Technology Engineering",
@@ -295,23 +315,54 @@ const Portfolio = () => {
         },
     ];
 
-    const certificates = [
+    const experience = [
         {
-            title: "CCNAv7 III TI 3-2023 - G",
-            issuer: "Cisco",
-            description: "Cisco certification covering advanced networking concepts, including the configuration and troubleshooting of complex networks. This level delves into topics such as advanced OSPF, network security, and network automation with tools like Python and RESTful APIs."
+            title: "Full-Stack Web Developer",
+            institution: "Comercializadora Inter Global, Interglo S.L.R.",
+            period: "April 2025 - Present",
+            description: "Developing and maintaining full-stack web applications using modern technologies like React, Node.js, and databases. Collaborating on projects to deliver high-quality software solutions.",
         },
         {
-            title: "CCNAv7 II TI 2-2023 - F",
-            issuer: "Cisco",
-            description: "Cisco certification focused on the configuration and management of intermediate-level networks. It includes concepts like VLAN implementation, RSTP, DHCP, NAT, and basic dynamic routing configuration with OSPF in small and medium-sized networks."
-        },
-        {
-            title: "CCNAv7 I TI 1-2023 - A",
-            issuer: "Cisco",
-            description: "Cisco entry-level certification introducing networking fundamentals, including the OSI model, IP addressing, and the basic configuration of network devices like switches and routers. This certificate provides a solid foundation for understanding basic networking concepts."
+            title: "Internship at Interglo",
+            institution: "Comercializadora Inter Global, Interglo S.L.R.",
+            period: "February 2025 - May 2025",
+            description: "Gained hands-on experience in web development, learning full-stack technologies, and contributing to company projects under supervision.",
         },
     ];
+
+
+    const certificates = [
+        {
+            title: 'English for Work Program Modules 1 and 2',
+            issuer: 'Universidad Técnica Nacional',
+            description:
+                'Certificate for completing the English for Work program, covering modules 1 and 2, focusing on practical English skills for professional environments, including communication, vocabulary, and workplace scenarios.',
+        },
+        {
+            title: 'English Language Certificate',
+            issuer: 'Universidad de Costa Rica',
+            description:
+                'Certificate demonstrating proficiency in the English language, covering reading, writing, listening, and speaking skills at an intermediate level. Listening: B2, Reading: B1, Writing: A2, Speaking: A2.',
+        },
+        {
+            title: 'CCNAv7 III TI 3-2023 - G',
+            issuer: 'Cisco',
+            description:
+                'Cisco certification covering advanced networking concepts, including the configuration and troubleshooting of complex networks. This level delves into topics such as advanced OSPF, network security, and network automation with tools like Python and RESTful APIs.',
+        },
+        {
+            title: 'CCNAv7 II TI 2-2023 - F',
+            issuer: 'Cisco',
+            description:
+                'Cisco certification focused on the configuration and management of intermediate-level networks. It includes concepts like VLAN implementation, RSTP, DHCP, NAT, and basic dynamic routing configuration with OSPF in small and medium-sized networks.',
+        },
+        {
+            title: 'CCNAv7 I TI 1-2023 - A',
+            issuer: 'Cisco',
+            description:
+                'Cisco entry-level certification introducing networking fundamentals, including the OSI model, IP addressing, and the basic configuration of network devices like switches and routers. This certificate provides a solid foundation for understanding basic networking concepts.',
+        },
+    ]
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -337,6 +388,7 @@ const Portfolio = () => {
 
     const navItems = [
         { id: 'about', title: 'About' },
+        { id: 'experience', title: 'Experience' },
         { id: 'skills', title: 'Skills' },
         { id: 'projects', title: 'Projects' },
         { id: 'education', title: 'Education' },
@@ -409,10 +461,10 @@ const Portfolio = () => {
                 >
                     <motion.h2 className="text-3xl font-bold mb-4 text-sky-500" variants={itemVariants}>About me</motion.h2>
                     <motion.p className="text-white mb-4" variants={itemVariants}>
-                        I'm an Information Technology Engineering student with a focus on full-stack web development. I am known for my attention to detail and analytical approach to problem-solving.
+                        I'm a Full-Stack Web Developer with a background in Information Technology Engineering. I am known for my attention to detail and analytical approach to problem-solving.
                     </motion.p>
                     <motion.a
-                        href="https://estuutnac-my.sharepoint.com/:b:/g/personal/emrodriguezso_est_utn_ac_cr/ETBF9VtC3ShOgF4FoGxJfX8BHj3D7ed54S-yTbJRmL9z2g?e=uc5cDB"
+                        href="/CV_Emmanuel_2025.pdf"
                         download
                         className="inline-flex items-center bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600 transition-colors duration-300"
                         target="_blank" rel="noopener noreferrer"
@@ -422,6 +474,23 @@ const Portfolio = () => {
                     >
                         Download CV <Download className="ml-2 w-4 h-4" />
                     </motion.a>
+
+                </motion.section>
+                <motion.section
+                    id="experience"
+                    className="my-12"
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                >
+                    <motion.h2 className="text-3xl font-bold mb-6 text-center text-sky-500" variants={itemVariants}>Experience</motion.h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {experience.map((exp, index) => (
+                            <motion.div key={index} variants={itemVariants}>
+                                <ExperienceCard {...exp} />
+                            </motion.div>
+                        ))}
+                    </div>
                 </motion.section>
 
                 <motion.section
@@ -569,7 +638,7 @@ const Portfolio = () => {
             </AnimatePresence>
 
             <footer className="bg-gray-800 text-center p-4 text-white">
-                <p>&copy; 2024 Emmanuel Rodríguez Solano.</p>
+                <p>&copy; {new Date().getFullYear()} Emmanuel Rodríguez Solano.</p>
             </footer>
 
             {/* Google Translate Element */}
