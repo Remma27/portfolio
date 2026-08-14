@@ -1,27 +1,16 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
-import { 
+import {
     Menu, X, Linkedin, Mail, Phone, Github, ExternalLink, Download, ChevronUp,
     Globe, Code2, FileJson, Database, Cloud, Server, Smartphone, Monitor,
     Terminal, Layers, Package, GitBranch, Cpu, Box
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const TechIcon = ({ name }) => {
-    const Icon = getTechIcon(name);
-    return (
-        <motion.div 
-            className={`${getTechColor(name)} text-white rounded-full px-3 py-1 text-sm flex items-center shadow-md hover:shadow-xl transition-all`}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            {Icon && <Icon className="w-4 h-4 mr-1.5" />}
-            {name}
-        </motion.div>
-    );
-};
-
+// Google Drive share link for the CV (see https://support.google.com/docs/answer/39593).
+// Use the "Anyone with the link" sharing; export=download forces the download.
+const CV_URL = 'https://drive.google.com/file/d/1XqH9Oqh3cGcetDQKaLUhEwUIguFijigw/view?usp=sharing';
 
 const getTechIcon = (tech) => {
     const icons = {
@@ -57,49 +46,29 @@ const getTechIcon = (tech) => {
         'Git': GitBranch,
         'jQuery': Code2,
         'RxJS': Package,
+        'ODBC': Database,
+        'QR Codes': Box,
     };
     return icons[tech] || Cpu;
 };
 
-const getTechColor = (tech) => {
-    const colors = {
-        'JavaScript': 'bg-yellow-600',
-        'TypeScript': 'bg-blue-700',
-        'Python': 'bg-blue-500',
-        'Java': 'bg-red-700',
-        'React': 'bg-cyan-600',
-        'Angular': 'bg-red-600',
-        'Express.js': 'bg-gray-700',
-        'Node.js': 'bg-green-600',
-        'MongoDB': 'bg-green-700',
-        'MySQL': 'bg-blue-800',
-        'SQL': 'bg-indigo-700',
-        'Oracle': 'bg-red-800',
-        'Firebase': 'bg-orange-600',
-        'AWS': 'bg-yellow-700',
-        'Git': 'bg-orange-700',
-        'GitHub': 'bg-purple-800',
-        'Android Studio': 'bg-green-800',
-        'React Native': 'bg-purple-600',
-        'HTML': 'bg-orange-700',
-        'CSS': 'bg-blue-600',
-        'jQuery': 'bg-blue-700',
-        'RxJS': 'bg-purple-700',
-        'Windows': 'bg-blue-800',
-        'Linux': 'bg-yellow-800',
-        'APIs RESTful': 'bg-green-700',
-        'GraphQL': 'bg-pink-700',
-        'Apollo': 'bg-indigo-800',
-        'PokeAPI': 'bg-red-700',
-        'Kotlin': 'bg-purple-800',
-    };
-    return colors[tech] || 'bg-gray-600';
+const TechIcon = ({ name }) => {
+    const Icon = getTechIcon(name);
+    return (
+        <motion.div
+            className="inline-flex items-center bg-slate-100 text-slate-700 border border-slate-200 rounded-full px-3 py-1 text-sm"
+            whileHover={{ y: -2 }}
+        >
+            {Icon && <Icon className="w-4 h-4 mr-1.5 text-slate-500" />}
+            {name}
+        </motion.div>
+    );
 };
 
 const TechCategory = ({ category, technologies }) => (
-    <div className="mb-4 text-center">
-        <h3 className="text-lg font-semibold mb-2">{category}</h3>
-        <div className="flex flex-wrap gap-2 justify-center items-center">
+    <div className="mb-4">
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-3">{category}</h3>
+        <div className="flex flex-wrap gap-2">
             {technologies.map((tech, index) => (
                 <TechIcon key={index} name={tech} />
             ))}
@@ -107,14 +76,29 @@ const TechCategory = ({ category, technologies }) => (
     </div>
 );
 
+const SectionTitle = ({ children, itemVariants }) => (
+    <div className="mb-10">
+        <motion.h2
+            className="text-3xl md:text-4xl font-bold text-center text-slate-900"
+            variants={itemVariants}
+        >
+            {children}
+        </motion.h2>
+        <motion.div
+            className="w-12 h-1 bg-indigo-600 mx-auto rounded-full mt-4"
+            variants={itemVariants}
+        />
+    </div>
+);
+
 const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, pageUrl }) => (
-    <motion.div 
-        className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-gray-700"
+    <motion.div
+        className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
         whileHover={{ y: -5 }}
     >
         <div className="p-6 flex flex-col h-full">
-            <h3 className="text-xl font-bold mb-3 text-sky-400">{title}</h3>
-            <p className="text-gray-300 mb-4 grow overflow-y-auto text-sm leading-relaxed">
+            <h3 className="text-lg font-semibold mb-3 text-slate-900">{title}</h3>
+            <p className="text-slate-600 mb-4 grow overflow-y-auto text-sm leading-relaxed">
                 {description}
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
@@ -123,62 +107,69 @@ const ProjectCard = ({ title, description, technologies, projectUrl, videoUrl, p
                 ))}
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-                <ActionButton href={projectUrl} label="Repository" className="bg-sky-500 hover:bg-sky-600" />
-                {videoUrl && <ActionButton href={videoUrl} label="Video" className="bg-green-500 hover:bg-green-600" />}
-                {pageUrl && <ActionButton href={pageUrl} label="Page" className="bg-orange-500 hover:bg-orange-600" />}
+                <ActionButton href={projectUrl} label="Repository" />
+                {videoUrl && <ActionButton href={videoUrl} label="Video" />}
+                {pageUrl && <ActionButton href={pageUrl} label="Page" />}
             </div>
         </div>
     </motion.div>
 );
 
-const ActionButton = ({ href, label, className }) => (
+const ActionButton = ({ href, label }) => (
     <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center text-white px-4 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm font-medium shadow-md hover:shadow-lg ${className}`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className="inline-flex items-center border border-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium hover:border-indigo-500 hover:text-indigo-600 transition-all duration-200"
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.97 }}
     >
         {label} <ExternalLink className="ml-1 w-4 h-4" />
     </motion.a>
 );
 
 const EducationCard = ({ title, institution, period }) => (
-    <motion.div 
-        className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[200px] h-full border border-gray-700"
-        whileHover={{ y: -5, scale: 1.02 }}
+    <motion.div
+        className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full"
+        whileHover={{ y: -5 }}
     >
-        <h3 className="text-xl font-bold text-sky-400 mb-2">{title}</h3>
-        <p className="text-gray-300 mb-1">{institution}</p>
-        <p className="text-gray-400 text-sm">{period}</p>
+        <div>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+            <p className="text-slate-600">{institution}</p>
+        </div>
+        <p className="text-slate-400 text-sm mt-3">{period}</p>
     </motion.div>
 );
 
 const CertificateCard = ({ title, issuer, description }) => (
-    <motion.div 
-        className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[200px] h-full border border-gray-700"
-        whileHover={{ y: -5, scale: 1.02 }}
+    <motion.div
+        className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
+        whileHover={{ y: -5 }}
     >
-        <h3 className="text-xl font-bold mb-3 text-sky-400">{title}</h3>
-        <p className="text-gray-300 mb-2 font-medium">{issuer}</p>
-        <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+        <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+        <p className="text-sm font-medium text-indigo-600 mb-2">{issuer}</p>
+        <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
     </motion.div>
 );
 
 const ExperienceCard = ({ title, institution, period, description }) => (
-    <motion.div 
-        className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[200px] h-full border border-gray-700"
-        whileHover={{ y: -5, scale: 1.02 }}
+    <motion.div
+        className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full"
+        whileHover={{ y: -5 }}
     >
-        <h3 className="text-xl font-bold mb-3 text-sky-400">{title}</h3>
-        <p className="text-gray-300 mb-1 font-medium">{institution}</p>
-        <p className="text-gray-400 text-sm mb-3">{period}</p>
-        <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
+        <div>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+            <p className="text-slate-600 font-medium">{institution}</p>
+            <p className="text-slate-400 text-sm mb-3">{period}</p>
+            <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
+        </div>
     </motion.div>
 );
 
 const Portfolio = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => {
             setShowScrollTop(window.pageYOffset > 300);
@@ -188,17 +179,10 @@ const Portfolio = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showScrollTop, setShowScrollTop] = useState(false);
-
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const scrollToSection = (sectionId) => {
@@ -206,10 +190,7 @@ const Portfolio = () => {
         if (section) {
             const navHeight = document.querySelector('nav').offsetHeight;
             const sectionTop = section.offsetTop - navHeight - 20;
-            window.scrollTo({
-                top: sectionTop,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: sectionTop, behavior: 'smooth' });
         }
         setIsMenuOpen(false);
     };
@@ -218,12 +199,12 @@ const Portfolio = () => {
         'Programming Languages': ['C#', 'JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin'],
         'Frameworks and Libraries': ['ASP.NET', 'React', 'Angular', 'Express.js'],
         'Mobile Development': ['Android Studio', 'React Native'],
-        Databases: ['MySQL','MongoDB', 'SQL', 'Oracle'],
-        'Cloud Technologies': ['Azure','AWS'],
+        Databases: ['MySQL', 'MongoDB', 'SQL', 'Oracle'],
+        'Cloud Technologies': ['Azure', 'AWS'],
         'Version Control': ['Git', 'GitHub'],
         'Operating Systems': ['Windows', 'Linux'],
         Others: ['Node.js', 'Firebase', 'RESTful APIs'],
-    }
+    };
 
     const softSkills = [
         'Detailed Analysis',
@@ -357,8 +338,12 @@ const Portfolio = () => {
         },
     ];
 
-
     const certificates = [
+        {
+            title: 'Microsoft Azure Fundamentals (AZ-900)',
+            issuer: 'Microsoft',
+            description: 'Entry-level certification validating foundational knowledge of cloud concepts, Azure core services and workloads, architecture, security, privacy, compliance, trust, and pricing and support for cloud solutions.',
+        },
         {
             title: 'English for Work Program Modules 1 and 2',
             issuer: 'Universidad Técnica Nacional',
@@ -389,16 +374,16 @@ const Portfolio = () => {
             description:
                 'Cisco entry-level certification introducing networking fundamentals, including the OSI model, IP addressing, and the basic configuration of network devices like switches and routers. This certificate provides a solid foundation for understanding basic networking concepts.',
         },
-    ]
+    ];
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
-            }
-        }
+                staggerChildren: 0.1,
+            },
+        },
     };
 
     const itemVariants = {
@@ -408,9 +393,9 @@ const Portfolio = () => {
             opacity: 1,
             transition: {
                 type: 'spring',
-                stiffness: 100
-            }
-        }
+                stiffness: 100,
+            },
+        },
     };
 
     const navItems = [
@@ -420,15 +405,15 @@ const Portfolio = () => {
         { id: 'projects', title: 'Projects' },
         { id: 'education', title: 'Education' },
         { id: 'certificates', title: 'Certificates' },
-        { id: 'contact', title: 'Contact' }
+        { id: 'contact', title: 'Contact' },
     ];
 
     return (
-        <div className="bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 text-white min-h-screen relative">
-            <nav className="bg-gray-800/95 backdrop-blur-sm p-4 sticky top-0 z-50 shadow-2xl transition-all duration-300 border-b border-gray-700">
+        <div className="bg-slate-50 text-slate-800 min-h-screen">
+            <nav className="bg-white/90 backdrop-blur-sm p-4 sticky top-0 z-50 shadow-sm transition-all duration-300 border-b border-slate-200">
                 <div className="container mx-auto flex justify-between items-center">
-                    <motion.h1 
-                        className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent"
+                    <motion.h1
+                        className="text-2xl font-bold text-slate-900"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
@@ -436,14 +421,13 @@ const Portfolio = () => {
                         Emmanuel Rodríguez
                     </motion.h1>
 
-                    {/* Menu for larger screens */}
                     <div className="hidden md:flex space-x-4">
                         {navItems.map((item) => (
                             <motion.button
                                 key={item.id}
                                 onClick={() => scrollToSection(item.id)}
-                                className="hover:text-sky-500 transition-colors duration-300"
-                                whileHover={{ scale: 1.1 }}
+                                className="text-slate-600 hover:text-indigo-600 transition-colors duration-300"
+                                whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 {item.title}
@@ -451,21 +435,19 @@ const Portfolio = () => {
                         ))}
                     </div>
 
-                    {/* Hamburger button for smaller screens */}
                     <motion.button
                         onClick={toggleMenu}
-                        className="md:hidden text-sky-400"
+                        className="md:hidden text-slate-700"
                         whileTap={{ scale: 0.95 }}
                     >
                         {isMenuOpen ? <X /> : <Menu />}
                     </motion.button>
                 </div>
 
-                {/* Dropdown menu for smaller screens */}
                 <AnimatePresence>
                     {isMenuOpen && (
                         <motion.div
-                            className="md:hidden bg-gray-800 p-4 flex flex-col space-y-2"
+                            className="md:hidden bg-white border-t border-slate-200 p-4 flex flex-col space-y-2"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
@@ -474,7 +456,7 @@ const Portfolio = () => {
                                 <motion.button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
-                                    className="block py-2 hover:text-sky-500 transition-colors duration-300 text-left"
+                                    className="block py-2 text-slate-600 hover:text-indigo-600 transition-colors duration-300 text-left"
                                     whileHover={{ x: 10 }}
                                 >
                                     {item.title}
@@ -493,31 +475,38 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-6 bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
+                    <SectionTitle itemVariants={itemVariants}>About me</SectionTitle>
+                    <motion.h3
+                        className="text-3xl font-bold text-slate-900 mb-2"
                         variants={itemVariants}
                     >
-                        About me
-                    </motion.h2>
-                    <motion.p 
-                        className="text-gray-300 mb-8 text-lg max-w-2xl mx-auto leading-relaxed" 
+                        Emmanuel Rodríguez
+                    </motion.h3>
+                    <motion.p
+                        className="text-lg font-medium text-indigo-600 mb-4"
+                        variants={itemVariants}
+                    >
+                        Full-Stack Web Developer
+                    </motion.p>
+                    <motion.p
+                        className="text-slate-600 mb-8 text-lg max-w-2xl mx-auto leading-relaxed"
                         variants={itemVariants}
                     >
                         I'm a Full-Stack Web Developer with a background in Information Technology Engineering. I am known for my attention to detail and analytical approach to problem-solving.
                     </motion.p>
                     <motion.a
-                        href="/CV_Emmanuel_2025.pdf"
-                        download
-                        className="inline-flex items-center bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-3 rounded-lg hover:from-sky-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
-                        target="_blank" rel="noopener noreferrer"
+                        href={CV_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 font-medium"
                         variants={itemVariants}
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                     >
                         Download CV <Download className="ml-2 w-5 h-5" />
                     </motion.a>
-
                 </motion.section>
+
                 <motion.section
                     id="experience"
                     className="my-16"
@@ -525,12 +514,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Experience
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Experience</SectionTitle>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {experience.map((exp, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -547,18 +531,13 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Technical Skills
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Technical Skills</SectionTitle>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {Object.entries(technologiesByCategory).map(([category, technologies]) => (
-                            <motion.div 
-                                key={category} 
+                            <motion.div
+                                key={category}
                                 variants={itemVariants}
-                                className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 shadow-xl"
+                                className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm"
                             >
                                 <TechCategory category={category} technologies={technologies} />
                             </motion.div>
@@ -573,21 +552,16 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Soft Skills
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Soft Skills</SectionTitle>
                     <div className="flex flex-wrap justify-center gap-4">
                         {softSkills.map((skill, index) => (
                             <motion.div
                                 key={index}
-                                className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl px-6 py-3 shadow-lg border border-gray-700"
+                                className="bg-white rounded-xl px-6 py-3 shadow-sm border border-slate-200"
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.05, y: -2 }}
                             >
-                                <span className="text-gray-200 font-medium">{skill}</span>
+                                <span className="text-slate-700 font-medium">{skill}</span>
                             </motion.div>
                         ))}
                     </div>
@@ -600,12 +574,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Projects
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Projects</SectionTitle>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {projects.map((project, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -629,12 +598,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Education
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Education</SectionTitle>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {education.map((edu, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -651,12 +615,7 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Certificates
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Certificates</SectionTitle>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {certificates.map((cert, index) => (
                             <motion.div key={index} variants={itemVariants}>
@@ -673,23 +632,18 @@ const Portfolio = () => {
                     animate="visible"
                     variants={containerVariants}
                 >
-                    <motion.h2 
-                        className="text-4xl font-bold mb-10 bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent" 
-                        variants={itemVariants}
-                    >
-                        Contact
-                    </motion.h2>
+                    <SectionTitle itemVariants={itemVariants}>Contact</SectionTitle>
                     <div className="flex flex-col items-center space-y-4">
                         {[
                             { href: "tel:+50672149100", icon: <Phone className="mr-3" />, text: "(+506) 72149100" },
                             { href: "mailto:emmanuelrsolano27@gmail.com", icon: <Mail className="mr-3" />, text: "emmanuelrsolano27@gmail.com" },
                             { href: "https://www.linkedin.com/in/emmanuel-rodríguez-solano-98961a2ba", icon: <Linkedin className="mr-3" />, text: "LinkedIn" },
-                            { href: "https://github.com/Remma27", icon: <Github className="mr-3" />, text: "GitHub" }
+                            { href: "https://github.com/Remma27", icon: <Github className="mr-3" />, text: "GitHub" },
                         ].map((item, index) => (
                             <motion.a
                                 key={index}
                                 href={item.href}
-                                className="flex items-center text-gray-300 hover:text-sky-400 transition-all duration-300 bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-3 rounded-xl shadow-lg hover:shadow-xl border border-gray-700"
+                                className="flex items-center text-slate-700 hover:text-indigo-600 transition-all duration-300 bg-white px-6 py-3 rounded-xl shadow-sm hover:shadow-md border border-slate-200"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variants={itemVariants}
@@ -706,7 +660,7 @@ const Portfolio = () => {
             <AnimatePresence>
                 {showScrollTop && (
                     <motion.button
-                        className="fixed bottom-6 right-6 bg-gradient-to-r from-sky-500 to-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-sky-500/50 border border-sky-400"
+                        className="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg"
                         onClick={scrollToTop}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: showScrollTop ? 1 : 0, y: showScrollTop ? 0 : 20 }}
@@ -720,7 +674,7 @@ const Portfolio = () => {
                 )}
             </AnimatePresence>
 
-            <footer className="bg-gray-800/95 backdrop-blur-sm text-center p-6 text-gray-300 border-t border-gray-700 mt-20">
+            <footer className="bg-white border-t border-slate-200 text-center p-6 text-slate-500 mt-20">
                 <p className="font-medium">&copy; {new Date().getFullYear()} Emmanuel Rodríguez Solano.</p>
             </footer>
 
@@ -729,6 +683,5 @@ const Portfolio = () => {
         </div>
     );
 };
-
 
 export default Portfolio;
